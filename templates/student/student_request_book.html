@@ -1,0 +1,204 @@
+{% extends 'student/student_layout.html' %}
+
+{% block title %}
+  {% if check==False %}
+    Request Book
+  {% else %}
+    Requested Book
+  {% endif %}
+{% endblock %}
+
+{% block style %}
+<style>
+      .desc{
+        margin: 0 7rem 4rem 7rem;
+      }
+
+      .book{
+        display: flex;
+        border: 3px solid black;
+        margin: 1rem 4rem 1rem 4rem;
+        border-radius: 2rem;
+        position: relative;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .img-container{
+        width: 18rem;
+        height: 22rem;
+        border: 0.5px solid black;
+        overflow: hidden;
+        margin: 1rem 1rem 1rem 1rem;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .img-container img{
+        object-fit: contain;
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .details{
+        margin-top: 1rem;
+        text-align: left;
+      }
+
+      .details .title{
+        font-weight: 700;
+        word-wrap: break-word;
+        max-width: 55rem;
+      }
+
+      .details .author{
+        font-style: italic;
+        margin-bottom: 5rem;
+      }
+
+      .details .language{
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 9rem;
+      }
+
+      .details .view{
+        border: 2px solid #000;
+        border-radius: 1rem;
+        background-color: #BAEE76;
+        font-size: 1.3rem;
+        transition: .3s;
+        padding: .5rem 1rem .5rem 1rem;
+        width: 10rem;
+        margin-right: 2rem;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 2rem;
+      }
+
+      .details .view:hover{
+        box-shadow: 6px 6px #8ec151;
+        transition: .3s;
+      }
+
+      .pages{
+        border: 2px solid #000;
+        border-radius: 50%;
+        padding: 1rem 2rem 1rem 2rem;
+        font-size: 2rem;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin: 0rem 2rem 1rem 2rem;
+        text-align: center;
+        width: 10rem;
+      }
+
+      .feedback{
+        text-align: left;
+        margin-left: 3rem;
+        margin-right: 5rem;
+      }
+
+      .feedback h1{
+        text-align: center;
+      }
+
+      .feedback form{
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .feedback label{
+        font-size: 2.5rem;
+      }
+
+      .feedback textarea{
+        width: 100%;
+        height: 10rem;
+        font-size: 1.5rem;
+        resize: none;
+        padding: 1rem;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+
+      .feedbacks{
+        text-align: left;
+        margin-left: 3rem;
+        margin-right: 3rem;
+      }
+
+      .feedbacks .text{
+        font-family: "Montserrat", sans-serif;
+      }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+  {% if check == False %}
+    <h1 class="heading">Request Book: "{{book.title}}"</h1>
+  {% else %}
+    <h1 class="heading">Requested Book: "{{book.title}}"</h1>
+  {% endif %}
+
+  {% if check==False %}
+    <h2>Are you sure you want to issue this book?</h2>
+  {% endif %}
+  <h4 class="desc">If the request is accepted by the librarian, the book will be issued for 7 days. Though, librarian can revoke the book and you can also return the book, before 7 days are over. </h4>
+
+  <br>
+  {% if count>=5 %}
+    <h3 class="count_mssg">You have already issued or requested 5 books. You cannot request or issue more than that at a time.</h3>
+  {% endif %}
+
+  <div class="book">
+    <div class="img-container">
+        <img src="{{book.image}}" alt="{{ book.title }} Cover">
+    </div>
+    <div class="details">
+        <h1 class="title">{{book.title}}</h1>
+        <h2 class="author">{{book.author}}</h2>
+        <h4 class="language">Language: {{book.language}}</h4>
+
+        {% if check==False %}
+          {% if count<5 %}
+          <form action="{{ url_for('my_requests_post', book_id=book.book_id) }}" method="post">
+            <button type="submit" class="view">Confirm Request</button>
+          </form>
+          {% else %}
+            <button class="view" disabled>Confirm Request</button> 
+          {% endif %}
+        {% else %}
+          <button class="view" disabled>Confirm Request</button>
+        {% endif %}
+
+        <span class="pages">{{book.pages}} <br> <h5>pages</h5></span>
+    </div>
+</div>
+
+
+<h1 class="heading">Reviews</h1>
+<div class="feedback">
+  <h1>{{reviews|length}} reviews</h1>
+  <form method="post">
+    <label for="review">Your Review</label>
+    <br>
+    <textarea name="review" placeholder="Write your review about the book here..."></textarea>
+    <button type="submit" class="btn btn-primary">Post Review</button>
+  </form>
+</div>
+
+<hr>
+
+<div class="feedbacks">
+  {% for review in reviews %}
+    <h3><b>{{review[0]}}</b></h3>
+    <h4 class="text">{{review[1]}}</h4>
+    <hr>
+  {% endfor %}
+</div>
+{% endblock %}

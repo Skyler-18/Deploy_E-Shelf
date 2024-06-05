@@ -1,0 +1,55 @@
+{% extends 'lib_layout.html' %}
+
+{% block title %}
+    Add Section
+{% endblock %}
+
+{% block style %}
+<style>
+      .form{
+        margin-top: 0rem;
+        font-size: 1.7rem;
+    }
+
+    .form-control{
+        width: 30rem;
+        margin: 0 auto;
+    }
+
+    .btn{
+        margin-top: 2rem;
+        background-color: #BAEE76;
+        color: black;
+        font-size: 1.5rem;
+        font-weight: 700;
+        width: 15rem;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<form class="form" method="post">
+    <h1 class="heading">Add Section</h1>
+
+    <div>
+        <label for="title" class="col-form-label">Title</label>
+        <input type="text" name="title" placeholder="Enter title for category" class="form-control" required>
+    </div>
+
+    <div>
+        <label for="description" class="col-form-label">Description <i>(optional)</i> </label>
+        <input type="text" name="description" placeholder="Enter description for category" class="form-control">
+    </div>
+
+    <div>
+        <label for="date" class="col-form-label">Date</label>
+        <input type="date" name="date" placeholder="Date created" value="{{current_date}}" class="form-control">
+    </div>
+
+    <div class="col-12 d-flex justify-content-center">
+        <button type="submit" class="btn btn-success me-5">Add</button>
+    </div>
+</form>
+
+{% endblock %}

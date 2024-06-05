@@ -1,0 +1,41 @@
+{% extends 'student/student_layout.html' %}
+
+{% block title %}
+    Cancel Request
+{% endblock %}
+
+{% block style %}
+<style>
+      .form{
+        margin-top: 0rem;
+        font-size: 1.7rem;
+    }
+
+    .form-control{
+        width: 30rem;
+        margin: 0 auto;
+    }
+
+    .btn{
+        margin-top: 2rem;
+        color: black;
+        font-size: 1.5rem;
+        font-weight: 700;
+        width: 15rem;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<form class="form" method="post">
+    <h1 class="heading">Cancel Request for book : "{{title}}"</h1>
+
+    <h4>Are you sure you want to cancel request for this book?</h4>
+
+    <div class="col-12 d-flex justify-content-center">
+        <button type="submit" class="btn btn-danger me-5">Cancel Request</button>
+    </div>
+</form>
+
+{% endblock %}

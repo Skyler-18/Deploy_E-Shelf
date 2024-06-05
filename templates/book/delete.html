@@ -1,0 +1,41 @@
+{% extends 'lib_layout.html' %}
+
+{% block title %}
+    Remove Book
+{% endblock %}
+
+{% block style %}
+<style>
+      .form{
+        margin-top: 0rem;
+        font-size: 1.7rem;
+    }
+
+    .form-control{
+        width: 30rem;
+        margin: 0 auto;
+    }
+
+    .btn{
+        margin-top: 2rem;
+        color: black;
+        font-size: 1.5rem;
+        font-weight: 700;
+        width: 15rem;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<form class="form" method="post">
+    <h1 class="heading">Delete Book: "{{book.title}}" </h1>
+
+    <h1>Are you sure you want to remove this book?</h1>
+
+    <div class="col-12 d-flex justify-content-center">
+        <button type="submit" class="btn btn-danger me-5">Remove</button>
+    </div>
+</form>
+
+{% endblock %}

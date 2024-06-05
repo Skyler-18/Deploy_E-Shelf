@@ -1,0 +1,163 @@
+{% extends 'student/student_layout.html' %}
+
+{% block title %}
+    Books
+{% endblock %}
+
+{% block style %}
+<style>
+      .section-header{
+        text-align: left;
+        margin-left: 2rem;
+        margin-top: 2rem;
+      }
+
+      .content{
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .section{
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+        margin: 0rem 2rem 0rem 2rem;
+      }
+
+      .cover{
+        display: flex;
+        flex-direction: column;
+      }
+
+      .book{
+        border: 1px solid black;
+        width: 18rem;
+        height: 25rem;
+        flex: 0 0 auto;
+        margin-right: 10px;
+        padding: 10px;
+        white-space: normal;
+        position: relative;
+        color: rgb(255, 255, 255, 1);
+        overflow: hidden;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .book .title{
+        font-weight: bold;
+        z-index: 1;
+        font-size: 1.5rem;
+      }
+
+      .book .author{
+        font-style: italic;
+        z-index: 1;
+        text-align: left;
+        font-weight: 400;
+        font-size: 1.2rem;
+      }
+
+      .book .language{
+        z-index: 1;
+        text-align: left;
+      }
+
+      .book .pages{
+        z-index: 1;
+        text-align: left;
+      }
+
+      .book .issues{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-right: .5rem;
+      }
+
+      .book::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent white background */
+        z-index: -1;
+      }
+      
+      .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+      }
+
+      .btn-secondary, .btn-info{
+        margin-right: 10px;
+        width: 18rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        font-size: 1.5rem;
+      }
+
+      .btn-info:hover{
+        background-color: #0e90ab;
+      }
+    </style>
+{% endblock %}
+
+{% block body %}
+  <h1 class="heading">Find Books Here</h1>
+
+  <div class="content">
+    {% include 'student/filter.html' %}
+
+    {% for section in sections %}
+      <h1 class="section-header">{{section.title}}</h1>
+      <div class="section">
+        {% for book in section.books %}
+
+
+        {% if (filter_book!="" and filter_book.lower() in book.title.lower()) or (not filter_book) %}
+        {% if (filter_author!="" and filter_author.lower() in book.author.lower()) or (not filter_author) %}
+        {% if (filter_language!="" and filter_language.lower() in book.language.lower()) or (not filter_language) %}
+        {% if (filter_pages and book.pages<=filter_pages) or (not filter_pages) %}
+        {% if (filter_issues and filter_issues<=book.issue_num) or (not filter_issues) %}
+            <div class="cover">
+              <div class="book">
+                <h2 class="title">{{book.title}}</h2>
+                <h3 class="author">{{book.author}}</h3>
+                <h5 class="language">Language: {{book.language}}</h5>
+                <h5 class="pages">Pages: {{book.pages}}</h5>
+                
+                <div class="issues">
+                  <h5>{{book.issue_num}} issues yet</h5>
+                </div>
+                
+                <div class="background-image" style="background-image: url('{{book.image}}'); filter: blur(6px);"></div>
+              </div>
+
+              {% if book.book_id in books %}
+                <button type="button" class="btn btn-secondary" disabled>REQUESTED</button>
+              {% elif book.book_id in books_issued %}
+                <button type="button" class="btn btn-secondary" disabled>ISSUED</button>
+              {% else %}
+                <a href="{{url_for('student_request_book', book_id=book.book_id)}}"> <button type="button" class="btn btn-info">OPEN</button> </a>
+              {% endif %}
+            </div>
+
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        {% endif %}
+
+        {% endfor %}
+      </div>
+
+      {% endfor %}
+  </div>
+{% endblock %}

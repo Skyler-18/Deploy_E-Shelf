@@ -1,0 +1,79 @@
+{% extends 'lib_layout.html' %}
+
+{% block title %}
+  Books In {{section.title}}
+{% endblock %}
+
+{% block style %}
+<style>
+      .fa-solid{
+        color: green
+      }
+
+      .fa-solid:hover{
+        color: darkgreen;
+      }
+
+      .books{
+        margin-top: 3rem;
+        margin-right: 3rem;
+        margin-left: 3rem;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .book{
+        border: 3px solid black;
+        margin: 1rem 1rem 1rem 1rem;
+        padding: 1rem 1rem 0.2rem 1rem;
+        border-radius: 1rem;
+        text-align: left;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .book:hover{
+        color: #787676;
+      }
+
+      .book h1{
+        display: inline;
+        font-weight: bold;
+      }
+
+      .book h2{
+        display: inline;
+        font-style: italic;
+      }
+
+      .book h3{
+        text-align: right;
+        text-decoration: underline;
+      }
+
+      a{
+        color: #000;
+        text-decoration: none;
+      }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1 class="heading">Books In {{section.title}}</h1>
+    <a href="{{ url_for('add_book', section_id = section.section_id) }}">
+        <i class="fa-solid fa-circle-plus fa-4x"></i>
+    </a>
+
+    <div class="books">
+        {% for book in section.books %}
+
+        <a href="{{url_for('book_details', section_id=section.section_id, book_id=book.book_id)}}">
+          <div class="book">
+            <h1>{{book.title}} </h1> by
+            <h2> "{{book.author}}" </h2>
+            <br>
+            <h3>{{book.issue_num}} issues yet</h3>
+          </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}

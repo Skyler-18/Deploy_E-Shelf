@@ -1,0 +1,73 @@
+{% extends 'lib_layout.html' %}
+
+{% block title %}
+    Active Issues
+{% endblock %}
+
+{% block style %}
+<style>
+      .table{
+        margin-left: 5rem;
+        margin-right: 6rem;
+        max-width: calc(100% - 10rem);
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.5rem;
+      }
+
+      a{
+        text-decoration: none;
+        color: #000;
+      }
+
+      a:hover{
+        color: blue;
+      }
+    </style>
+{% endblock %}
+
+{% block body %}
+  <h1 class="heading">Active Issues</h1>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">S.No.</th>
+            <th scope="col">User</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Issued Date</th>
+            <th scope="col">Return Date</th>
+            <th scope="col">Action</th> <!-- New column without heading -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in range(issues|length) %}
+            <tr>
+                <td>{{ i+1 }}</td>
+                <td>
+                    <a href="{{url_for('view_student_profile', username=issues[i][1])}}"> {{issues[i][1]}} </a>
+                </td>
+                <td>
+                    <a href="{{url_for('view_book_details', book_id=issues[i][4])}}"> {{issues[i][0]}} </a>
+                </td>
+                <td>
+                    {{issues[i][2]}}
+                </td>
+                <td>
+                    {{issues[i][3]}}
+                </td>
+                <td>
+                    <a href="{{url_for('revoke_book', username=issues[i][1], book_id=issues[i][4])}}" class="btn btn-warning">Revoke Book</a> 
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}

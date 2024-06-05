@@ -1,0 +1,58 @@
+{% extends 'lib_layout.html' %}
+
+{% block title %}
+    Edit Profile
+{% endblock %}
+
+{% block style %}
+    <style>      
+          .form{
+              margin-top: 0rem;
+              font-size: 1.7rem;
+          }
+      
+          .form-control{
+              width: 30rem;
+              margin: 0 auto;
+          }
+
+        .btn{
+            margin-top: 2rem;
+            background-color: #BAEE76;
+            color: black;
+            font-size: 1.5rem;
+            font-weight: 700;
+            width: 15rem;
+        }
+
+        label{
+            margin-top: 1.5rem;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <form class="form" method="post">
+        <h1 class="heading">Edit Profile</h1>
+
+        <div>
+            <label for="username" class="col-form-label">Username</label>
+            <input type="text" name="username" placeholder="Enter your username" value="{{user.user_name}}" class="form-control" required>
+        </div>
+        <!-- <br> -->
+        <div>
+            <label for="curr_password" class="col-form-label">Current Password</label>
+            <input type="password" name="curr_password" placeholder="Enter your current password" class="form-control" required>
+        </div>
+
+        <div>
+            <label for="new_password" class="col-form-label">New Password</label>
+            <input type="password" name="new_password" placeholder="Type new password only if you want to change password" class="form-control">
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-success">SAVE</button>
+        </div>
+    </form>
+{% endblock %}

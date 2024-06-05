@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apni Library</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+    
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        
+        body{
+            text-align: center;
+            background-color: #E3FDFD;
+            margin-bottom: 1rem;
+            font-family: "Raleway", sans-serif;
+        }
+    
+        .logo{
+            color: purple;
+            font-family: "Pacifico", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 3rem;
+            background-color: #FCF54D;
+            margin-bottom: 0;
+          }
+
+          .top{
+            display: flex;
+            padding: 5rem 2rem 4rem 16rem;
+            gap: 13rem;
+          }
+
+          .welcome h1{
+            font-size: 4rem;
+            padding-bottom: 3rem;
+          }
+
+          .welcome h3{
+            font-size: 2rem;
+            padding-bottom: 0.6rem;
+          }
+
+          .welcome button{
+            margin-bottom: 2.4rem;
+            padding: 1rem;
+            width: 15rem;
+            height: 4rem;
+            font-size: 1.5rem;
+            border-radius: 40px;
+            border: 2px solid #000;
+            background-color: rgb(136, 205, 228);
+            cursor: pointer;
+            font-family: "Raleway", sans-serif;
+            display: inline-block; 
+            position: relative; 
+            transition: 0.5s; 
+          }
+
+          .welcome button:hover{
+            background-color: rgb(67, 158, 188);
+            border: none;
+            padding-right: 24px; 
+            padding-left:8px;
+          }
+
+          .welcome button:after { content: '»'; position: absolute; opacity: 0; top: 14px; right: -20px; transition: 0.5s; }
+
+          .welcome .lib{
+            margin-top: 2rem;
+          }
+
+          .img-container{
+            display: flex;
+            align-items: center;
+          }
+
+          .desc{
+            margin: 2rem 20rem 2rem 20rem;
+          }
+
+          .desc .points h1{
+            font-size: 3rem;
+          }
+
+          .desc .points ul{
+            padding-top: 5rem;
+            padding-left: 7rem;
+            text-align: left;
+            font-size: 2rem;
+            list-style-type: none;
+          }
+
+          .desc .points li{
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;         
+          }
+
+          .desc .points li img{
+            padding-right: 1rem;
+          }
+
+          .desc .blocks h1{
+            font-size: 3rem;
+            padding-top: 5rem;
+            padding-bottom: 3rem;
+          }
+
+          .desc .blocks h4{
+            font-size: 2rem;
+            font-weight: 250;
+            display: inline;
+            
+          }
+
+          .desc .blocks img{
+            display: inline;
+          }
+
+          .block1, .block2, .block3{
+            padding-left: 7rem;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            padding-bottom: 4rem;
+          }
+
+          .block1 h4, .block3 h4{
+            padding-right: 15rem;
+          }
+
+          .block2 img{
+            padding-right: 15rem;
+          }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <h1 class="logo">E-Shelf</h1>
+
+    <div class="top">
+      <div class="welcome">
+        <h1>Welcome to <br> E-Shelf!</h1>
+
+        <h3>Already a member?</h3>
+        <a href="{{url_for('student_login')}}">
+          <button>Log in</button>
+        </a>
+
+        <h3>Don't have an account?</h3>
+        <a href="{{url_for('register')}}">
+          <button>Sign up</button>
+        </a>
+
+        <h3 class="lib">Librarian?</h3>
+        <a href="{{url_for('lib_login')}}">
+          <button>Librarian Log in</button>
+        </a>
+      </div>
+
+      <div class="img-container">
+        <img src="/static/main.png">
+      </div>
+    </div>
+
+    <div class="desc">
+      <div class="points">
+        <h1>Issuing process:</h1>
+        <ul>
+          <li><img src="/static/bullet.png" width="50px"> Request an e-book, gain access for 7 days</li>
+          <br>
+          <li><img src="/static/bullet.png" width="50px"> Read and return the book within 7 days</li>
+          <br>
+          <li><img src="/static/bullet.png" width="50px"> Librarian may revoke the access before 7 days too</li>
+          <br>
+          <li><img src="/static/bullet.png" width="50px"> Request upto 5 books at a time</li>
+          <br>
+          <li><img src="/static/bullet.png" width="50px"> Download the book at ₹249/-</li>
+        </ul>
+      </div>
+
+      <div class="blocks">
+        <h1>Why choose us?</h1>
+
+        <div class="block1">
+          <h4>Easy and <br>quick issue!</h4>
+          <img src="/static/block1.png" width="180px">
+        </div>
+
+        <div class="block2">
+          <img src="/static/block2.png" width="180px">
+          <h4>Read <br>anywhere!</h4>
+        </div>
+
+        <div class="block3">
+          <h4>Reissue your <br>book online <br>anytime!</h4>
+          <img src="/static/block3.png" width="180px">
+        </div>
+      </div>
+    </div>
+</body>
+</html>
